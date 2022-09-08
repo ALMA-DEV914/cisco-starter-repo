@@ -4,6 +4,7 @@ import publicIp from "./publicIp.js";
 const GetUserv4Info = (props) => {
   const { waitTime } = props;
   const [userv4IpAddress, setUserv4IpAddress] = useState("");
+
   useEffect(() => {
     if (!userv4IpAddress) {
       setTimeout(function () {
@@ -11,6 +12,7 @@ const GetUserv4Info = (props) => {
       }, 1000 * waitTime);
     }
   });
+
   const getIp = () => {
     publicIp.v4().then(
       (result) => {
@@ -24,6 +26,7 @@ const GetUserv4Info = (props) => {
       }
     );
   };
+  
   return (
     <div>
       Your public v4 IP address:

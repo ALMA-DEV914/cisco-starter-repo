@@ -1,0 +1,26 @@
+{
+  "name": "cisco-starter-repo",
+  "version": "1.0.0",
+  "description": "Jumping off point for Cisco's backend Forage program",
+  "main": "index.js",
+  "scripts": {
+    "start": "node pylon/server.js",
+    "dev": "concurrently \"cd pylon && npm run watch\" \"cd sextant && npm start\"",
+    "install": "cd pylon && npm i && cd ../sextant && npm i",
+    "build": "cd sextant && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ALMA-DEV914/cisco-starter-repo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ALMA-DEV914/cisco-starter-repo/issues"
+  },
+  "homepage": "https://github.com/ALMA-DEV914/cisco-starter-repo#readme",
+  "dependencies": {
+    "concurrently": "^7.4.0"
+  }
+}
