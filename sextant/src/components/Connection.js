@@ -1,36 +1,30 @@
 import React, { Component } from "react";
+import { w3cwebsocket as W3CWebSocket } from "websocket";
+const client = new W3CWebSocket('ws://localhost:55455');
 
 class Connection extends Component {
-  // instance of websocket connection as a class property
-  ws = new WebSocket("ws://localhost:55455/ws");
+    constructor(props) {
+        super(props);
+        this.state = {
+            latency: null
+        };
+    }
 
-  componentDidMount() {
-    this.ws.onopen = () => {
-      // on connecting, do nothing but log it to the console
-      console.log("connected");
-    };
+    componentDidMount() {
+        client.onmessage = (message) => {
+            this.setState({
+                latency: new Date().getTime() - message.data
+            })
+        };
+    }
 
-    this.ws.onmessage = (evt) => {
-      // listen to data sent from the websocket server
-      const message = JSON.parse(evt.data);
-      this.setState({ dataFromServer: message });
-      console.log(message);
-      
-    };
-
-    this.ws.onclose = () => {
-      console.log("disconnected");
-      // automatically try to reconnect on connection loss
-    };
-  }
-
-  
-  render() {
-     return(
-        <div>{this.message}</div>
-     )
-    
-  }
+    render() {
+        return (
+            <span className="PylonConnector">
+                {this.state.latency}
+            </span>
+        );
+    }
 }
 
 export default Connection;
